@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Siteware.Data;
 using Microsoft.EntityFrameworkCore;
 using Pomelo.EntityFrameworkCore;
+using Siteware.Services;
 
 namespace Siteware
 {
@@ -24,7 +25,15 @@ namespace Siteware
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DataContext>(options => options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddControllers()
+                    .AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling =
+                        Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
             services.AddScoped<IRepository, Repository>();
+            services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<ICartService, CartService>();
+            services.AddScoped<ICartItemsService, CartItemsService>();
+
             services.AddControllersWithViews();
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

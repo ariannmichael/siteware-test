@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Siteware.Data
 {
-    interface IRepository
+    public interface IRepository
     {
         void Add<T>(T entity) where T : class;
         void Update<T>(T entity) where T : class;
@@ -25,7 +25,7 @@ namespace Siteware.Data
 
         // CartItems
         Task<CartItems[]> GetAllCartItemsAsync();
-        Task<CartItems> GetAllCartItemsAsyncById(int cartItemId);
+        Task<CartItems> GetCartItemsAsyncById(int cartItemId);
         Task<CartItems[]> GetAllCartItemsAsyncByCart(int cartId);
     }
 }

@@ -77,7 +77,8 @@ namespace Siteware.Data
         public async Task<Cart> GetCartAsyncById(int cartId)
         {
             IQueryable<Cart> query = this.context.Carts
-                .Where(c => c.id == cartId);
+                .Where(c => c.id == cartId)
+                .Include(c => c.cartItems);
 
             return await query.FirstOrDefaultAsync();
         }
@@ -86,7 +87,6 @@ namespace Siteware.Data
         public async Task<CartItems[]> GetAllCartItemsAsync()
         {
             IQueryable<CartItems> query = this.context.CartItems
-                .Include(ci => ci.cartId)
                 .Include(ci => ci.product);
 
             return await query.ToArrayAsync();
@@ -94,13 +94,12 @@ namespace Siteware.Data
         public async Task<CartItems[]> GetAllCartItemsAsyncByCart(int cartId)
         {
             IQueryable<CartItems> query = this.context.CartItems
-                .Include(ci => ci.cartId)
                 .Where(ci => ci.cartId == cartId);
 
             return await query.ToArrayAsync();
         }
 
-        public async Task<CartItems> GetAllCartItemsAsyncById(int cartItemId)
+        public async Task<CartItems> GetCartItemsAsyncById(int cartItemId)
         {
             IQueryable<CartItems> query = this.context.CartItems
                 .Where(ci => ci.id == cartItemId);
