@@ -9,6 +9,7 @@ using Siteware.Data;
 using Microsoft.EntityFrameworkCore;
 using Pomelo.EntityFrameworkCore;
 using Siteware.Services;
+using AutoMapper;
 
 namespace Siteware
 {
@@ -28,6 +29,7 @@ namespace Siteware
             services.AddControllers()
                     .AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling =
                         Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+            services.AddAutoMapper(typeof(Startup));
 
             services.AddScoped<IRepository, Repository>();
             services.AddScoped<IProductService, ProductService>();

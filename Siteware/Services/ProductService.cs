@@ -1,4 +1,5 @@
-﻿using Siteware.Data;
+﻿using AutoMapper;
+using Siteware.Data;
 using Siteware.Models;
 using System;
 using System.Collections.Generic;
@@ -10,10 +11,12 @@ namespace Siteware.Services
     public class ProductService : IProductService
     {
         private readonly IRepository repo;
+        private readonly IMapper mapper;
 
-        public ProductService(IRepository repo)
+        public ProductService(IRepository repo, IMapper mapper)
         {
             this.repo = repo;
+            this.mapper = mapper;
         }
 
         public async Task<Product[]> getAllProducts()
@@ -39,8 +42,10 @@ namespace Siteware.Services
             return results;
         }
 
-        public async Task<Product> postProduct(ProductDTO newProduct)
+        public async Task<Product> postProduct(ProductDTO newProductDTO)
         {
+            Product newProduct = this.mapper.Map<Product>(newProductDTO);
+
             this.repo.Add<Product>(newProduct);
 
             if (await this.repo.SaveChangesAsync())

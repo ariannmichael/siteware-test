@@ -39,13 +39,14 @@ namespace Siteware.Data
         // Products
         public async Task<Product[]> GetAllProductsAsync()
         {
-            IQueryable<Product> query = this.context.Products;
+            IQueryable<Product> query = this.context.Products.AsNoTracking();
             return await query.ToArrayAsync();
         }
 
         public async Task<Product> GetProductAsyncById(int productId)
         {
             IQueryable<Product> query = this.context.Products
+                .AsNoTracking()
                 .Where(p => p.id == productId);
 
             return await query.FirstOrDefaultAsync();
@@ -54,7 +55,8 @@ namespace Siteware.Data
         public async Task<Product[]> GetAllProductsByName(string name)
         {
             IQueryable<Product> query = this.context.Products
-                .Where(p => p.name.ToLower().Contains(name.ToLower()));
+                .Where(p => p.name.ToLower().Contains(name.ToLower()))
+                .AsNoTracking();
 
             return await query.ToArrayAsync();
         }
@@ -62,7 +64,8 @@ namespace Siteware.Data
         public async Task<Product[]> GetAllProductsByPrice(double price)
         {
             IQueryable<Product> query = this.context.Products
-                .Where(p => p.price == price);
+                .Where(p => p.price == price)
+                .AsNoTracking();
 
             return await query.ToArrayAsync();
         }
@@ -70,7 +73,8 @@ namespace Siteware.Data
         // Carts
         public async Task<Cart[]> GetAllCartAsync()
         {
-            IQueryable<Cart> query = this.context.Carts;
+            IQueryable<Cart> query = this.context.Carts
+                .AsNoTracking();
             return await query.ToArrayAsync();
         }
 
@@ -78,7 +82,8 @@ namespace Siteware.Data
         {
             IQueryable<Cart> query = this.context.Carts
                 .Where(c => c.id == cartId)
-                .Include(c => c.cartItems);
+                .Include(c => c.cartItems)
+                .AsNoTracking();
 
             return await query.FirstOrDefaultAsync();
         }
@@ -87,14 +92,16 @@ namespace Siteware.Data
         public async Task<CartItems[]> GetAllCartItemsAsync()
         {
             IQueryable<CartItems> query = this.context.CartItems
-                .Include(ci => ci.product);
+                .Include(ci => ci.product)
+                .AsNoTracking();
 
             return await query.ToArrayAsync();
         }
         public async Task<CartItems[]> GetAllCartItemsAsyncByCart(int cartId)
         {
             IQueryable<CartItems> query = this.context.CartItems
-                .Where(ci => ci.cartId == cartId);
+                .Where(ci => ci.cartId == cartId)
+                .AsNoTracking();
 
             return await query.ToArrayAsync();
         }
@@ -102,7 +109,8 @@ namespace Siteware.Data
         public async Task<CartItems> GetCartItemsAsyncById(int cartItemId)
         {
             IQueryable<CartItems> query = this.context.CartItems
-                .Where(ci => ci.id == cartItemId);
+                .Where(ci => ci.id == cartItemId)
+                .AsNoTracking();
 
             return await query.FirstOrDefaultAsync();
         }

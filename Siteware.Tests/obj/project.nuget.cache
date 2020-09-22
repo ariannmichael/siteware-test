@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "BPNOWXpPIRHqHTgfkDjXaSGizD4VftFk9sIqCHWM+Zfs2g1OdrmUz6OwhckOujSaiNR65C1riHOLnS9/eC9tLA==",
+  "dgSpecHash": "J3QUuyGwrddwuSb+bKeEObqyBqwulkglaig8BvScWyuOKpudfXnEPon6isguZq9FyM75maWrYF3WV4nU5BYqgQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\chael\\source\\repos\\siteware-test\\Siteware.Tests\\Siteware.Tests.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\chael\\.nuget\\packages\\automapper\\10.0.0\\automapper.10.0.0.nupkg.sha512",
+    "C:\\Users\\chael\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.0.1\\automapper.extensions.microsoft.dependencyinjection.8.0.1.nupkg.sha512",
     "C:\\Users\\chael\\.nuget\\packages\\bouncycastle.netcore\\1.8.3\\bouncycastle.netcore.1.8.3.nupkg.sha512",
     "C:\\Users\\chael\\.nuget\\packages\\google.protobuf\\3.6.1\\google.protobuf.3.6.1.nupkg.sha512",
     "C:\\Users\\chael\\.nuget\\packages\\k4os.compression.lz4\\1.1.11\\k4os.compression.lz4.1.1.11.nupkg.sha512",
@@ -97,6 +99,7 @@
     "C:\\Users\\chael\\.nuget\\packages\\system.net.primitives\\4.0.11\\system.net.primitives.4.0.11.nupkg.sha512",
     "C:\\Users\\chael\\.nuget\\packages\\system.net.sockets\\4.1.0\\system.net.sockets.4.1.0.nupkg.sha512",
     "C:\\Users\\chael\\.nuget\\packages\\system.reflection\\4.3.0\\system.reflection.4.3.0.nupkg.sha512",
+    "C:\\Users\\chael\\.nuget\\packages\\system.reflection.emit\\4.7.0\\system.reflection.emit.4.7.0.nupkg.sha512",
     "C:\\Users\\chael\\.nuget\\packages\\system.reflection.extensions\\4.3.0\\system.reflection.extensions.4.3.0.nupkg.sha512",
     "C:\\Users\\chael\\.nuget\\packages\\system.reflection.primitives\\4.3.0\\system.reflection.primitives.4.3.0.nupkg.sha512",
     "C:\\Users\\chael\\.nuget\\packages\\system.reflection.typeextensions\\4.3.0\\system.reflection.typeextensions.4.3.0.nupkg.sha512",

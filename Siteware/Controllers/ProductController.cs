@@ -111,7 +111,7 @@ namespace Siteware.Controllers
                     return NotFound();
                 }
 
-                return Created($"/product/{newProduct.id}", newProduct);    
+                return Ok(newProduct);    
             }
             catch (Exception ex)
             {
