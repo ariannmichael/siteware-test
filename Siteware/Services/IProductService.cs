@@ -12,7 +12,7 @@ namespace Siteware.Services
         public Task<Product> getProductById(int productId);
         public Task<Product[]> getProductByName(string name);
         public Task<Product[]> getProductByPrice(double price);
-        public Task<Product> postProduct(Product newProduct);
+        public Task<Product> postProduct(ProductDTO newProduct);
         public Task<Product> putProduct(int productId, Product newProduct);
         public Task<Boolean> deleteProduct(int productId);
     }

@@ -94,7 +94,6 @@ namespace Siteware.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("name")
-                        .IsRequired()
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<double>("price")

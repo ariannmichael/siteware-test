@@ -34,14 +34,16 @@ namespace Siteware.Services
             return results;
         }
 
-        public async Task<CartItems> postCartItem(CartItems newCartItem)
+        public async Task<CartItems[]> postCartItem(CartItemsDTO newCartItems)
         {
-
-            this.repo.Add<CartItems>(newCartItem);
+            foreach(CartItems element in newCartItems.cartItems)
+            {
+                this.repo.Add<CartItems>(element);
+            }
 
             if (await this.repo.SaveChangesAsync())
             {
-                return newCartItem;
+                return newCartItems.cartItems;
             }
 
             return null;

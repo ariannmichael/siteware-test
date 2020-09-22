@@ -39,7 +39,7 @@ namespace Siteware.Services
             return results;
         }
 
-        public async Task<Product> postProduct(Product newProduct)
+        public async Task<Product> postProduct(ProductDTO newProduct)
         {
             this.repo.Add<Product>(newProduct);
 
@@ -84,7 +84,7 @@ namespace Siteware.Services
                 }
             }
 
-            return null;
+            return false;
         }
     }
 }

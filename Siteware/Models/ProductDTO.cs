@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Siteware.Models
 {
-    public class Product
+    public class ProductDTO
     {
-        public Product() {}
-        public Product(int id, string name, double price, SaleTypes saleType = SaleTypes.NONE)
+        public ProductDTO() { }
+        public ProductDTO(int id, string name, double price, SaleTypes saleType = SaleTypes.NONE)
         {
             this.id = id;
             this.name = name;
@@ -18,7 +18,9 @@ namespace Siteware.Models
         }
 
         public int id { get; set; }
+        [Required]
         public string name { get; set; }
+        [Required]
         public double price { get; set; }
         [EnumDataType(typeof(SaleTypes))]
         public SaleTypes saletype { get; set; }

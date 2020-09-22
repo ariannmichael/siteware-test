@@ -26,7 +26,7 @@ namespace Siteware.Controllers
         {
             try
             {
-                var results = this.productService.getAllProducts();
+                var results = await this.productService.getAllProducts();
                 return Ok(results);
             }
             catch (Exception ex)
@@ -80,15 +80,15 @@ namespace Siteware.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> postProduct(Product newProduct)
+        public async Task<IActionResult> postProduct(ProductDTO product)
         {
             try
             {
-                Product product = await this.productService.postProduct(newProduct);
+                Product newProduct = await this.productService.postProduct(product);
                 
-                if(product != null)
+                if(newProduct != null)
                 {
-                    return Created($"/product/{product.id}", product);
+                    return Created($"/product/{newProduct.id}", newProduct);
                 }
             }
             catch (Exception ex)
@@ -100,13 +100,13 @@ namespace Siteware.Controllers
         }
 
         [HttpPut("{productId}")]
-        public async Task<IActionResult> putProduct(int productId, Product newProduct)
+        public async Task<IActionResult> putProduct(int productId, Product product)
         {
             try
             {
-                Product product = await this.productService.putProduct(productId, newProduct);
+                Product newProduct = await this.productService.putProduct(productId, product);
 
-                if(product == null)
+                if(newProduct == null)
                 {
                     return NotFound();
                 }

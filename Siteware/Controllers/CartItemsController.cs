@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Siteware.Data;
 using Siteware.Models;
 using Siteware.Services;
@@ -29,10 +31,9 @@ namespace Siteware.Controllers
                 var results = await this.cartItemsService.getAllCartItems();
                 return Ok(results);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                return this.StatusCode(StatusCodes.Status500InternalServerError, "Database error");
+                return this.StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
 
@@ -44,10 +45,9 @@ namespace Siteware.Controllers
                 var result = await this.cartItemsService.getCartItemById(cartItemId);
                 return Ok(result);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                return this.StatusCode(StatusCodes.Status500InternalServerError, "Database error");
+                return this.StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
 
@@ -59,51 +59,50 @@ namespace Siteware.Controllers
                 var results = await this.cartItemsService.getAllCartItemsByCartId(cartId);
                 return Ok(results);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, "Database error");
+                return this.StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
 
         [HttpPost]
-        public async Task<IActionResult> postCartItem(CartItems newCartItem)
+        public async Task<IActionResult> postCartItem(CartItemsDTO cartItemsDTO)
         {
             try
             {
-                CartItems cartItems = await this.cartItemsService.postCartItem(newCartItem);
+                CartItems[] cartItems = await this.cartItemsService.postCartItem(cartItemsDTO);
 
                 if (cartItems != null)
                 {
-                    return Created($"/cartItems/{newCartItem.id}", newCartItem);
+                    return Ok(cartItems);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                return this.StatusCode(StatusCodes.Status500InternalServerError, "Database error");
+                return this.StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
 
             return BadRequest();
         }
 
         [HttpPut("{cartItemId}")]
-        public async Task<IActionResult> putCartItem(int cartItemId, CartItems newCartItem)
+        public async Task<IActionResult> putCartItem(int cartItemId, CartItems cartItem)
         {
             try
             {
-                CartItems cartItem = await this.cartItemsService.putCartItem(cartItemId, newCartItem);
+                CartItems newCartItem = await this.cartItemsService.putCartItem(cartItemId, cartItem);
 
-                if (cartItem == null)
+                if (newCartItem == null)
                 {
                     return NotFound();
                 }
               
                 return Created($"/cartItems/{newCartItem.id}", newCartItem);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                return this.StatusCode(StatusCodes.Status500InternalServerError, "Database error");
+                return this.StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
 
@@ -121,10 +120,9 @@ namespace Siteware.Controllers
 
                 return Ok();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                return this.StatusCode(StatusCodes.Status500InternalServerError, "Database error");
+                return this.StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
     }

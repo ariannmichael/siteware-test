@@ -51,13 +51,13 @@ namespace Siteware.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> postCart(Cart newCart)
+        public async Task<IActionResult> postCart(Cart cart)
         {
             try
             {
-                Cart cart = await this.cartService.postCart(newCart);
+                Cart newCart = await this.cartService.postCart(cart);
 
-                if (cart != null)
+                if (newCart != null)
                 {
                     return Created($"/cart/{newCart.id}", newCart);
                 }
@@ -72,13 +72,13 @@ namespace Siteware.Controllers
         }
 
         [HttpPut("{cartId}")]
-        public async Task<IActionResult> putCart(int cartId, Cart newCart)
+        public async Task<IActionResult> putCart(int cartId, Cart cart)
         {
             try
             {
-                Cart cart = await this.cartService.putCart(cartId, newCart);
+                Cart newCart = await this.cartService.putCart(cartId, cart);
 
-                if (cart == null)
+                if (newCart == null)
                 {
                     return NotFound();
                 }

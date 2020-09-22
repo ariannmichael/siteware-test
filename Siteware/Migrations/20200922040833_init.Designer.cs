@@ -8,8 +8,8 @@ using Siteware.Data;
 namespace Siteware.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200920040108_initial")]
-    partial class initial
+    [Migration("20200922040833_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -96,7 +96,6 @@ namespace Siteware.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("name")
-                        .IsRequired()
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<double>("price")

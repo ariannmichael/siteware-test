@@ -11,7 +11,7 @@ namespace Siteware.Services
         public Task<CartItems[]> getAllCartItems();
         public Task<CartItems> getCartItemById(int cartItemId);
         public Task<CartItems[]> getAllCartItemsByCartId(int cartId);
-        public Task<CartItems> postCartItem(CartItems newCartItem);
+        public Task<CartItems[]> postCartItem(CartItemsDTO newCartItem);
         public Task<CartItems> putCartItem(int cartItemId, CartItems newCartItem);
         public Task<Boolean> deleteCartItem(int cartItemId);
     }
