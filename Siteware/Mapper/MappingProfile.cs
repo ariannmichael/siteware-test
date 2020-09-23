@@ -12,6 +12,7 @@ namespace Siteware.Mapper
         public MappingProfile()
         {
             CreateMap<ProductDTO, Product>();
+            CreateMap<CartItems, CartItemsDTO>();
         }
     }
 }

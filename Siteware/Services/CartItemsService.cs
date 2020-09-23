@@ -1,4 +1,5 @@
-﻿using Siteware.Data;
+﻿using AutoMapper;
+using Siteware.Data;
 using Siteware.Models;
 using System;
 using System.Collections.Generic;
@@ -10,40 +11,43 @@ namespace Siteware.Services
     public class CartItemsService : ICartItemsService
     {
         private readonly IRepository repo;
+        private readonly IMapper mapper;
 
-        public CartItemsService(IRepository repo)
+        public CartItemsService(IRepository repo, IMapper mapper)
         {
             this.repo = repo;
+            this.mapper = mapper;
         }
 
         public async Task<CartItems[]> getAllCartItems()
         {
-            CartItems[] results = await this.repo.GetAllCartItemsAsync();
-            return results;
+            CartItems[] cartItems = await this.repo.GetAllCartItemsAsync();
+            return cartItems;
         }
 
-        public async Task<CartItems> getCartItemById(int cartItemId)
+        public async Task<CartItemsDTO> getCartItemById(int cartItemId)
         {
             CartItems result = await this.repo.GetCartItemsAsyncById(cartItemId);
-            return result;
+            CartItemsDTO cartItem = this.mapper.Map<CartItemsDTO>(result);
+
+            return cartItem;
         }
 
-        public async Task<CartItems[]> getAllCartItemsByCartId(int cartId)
+        public async Task<CartItemsDTO[]> getAllCartItemsByCartId(int cartId)
         {
             CartItems[] results = await this.repo.GetAllCartItemsAsyncByCart(cartId);
-            return results;
+            var cartItems = this.mapper.Map<CartItems[], CartItemsDTO[]>(results.ToArray());
+
+            return cartItems;
         }
 
-        public async Task<CartItems[]> postCartItem(CartItemsDTO newCartItems)
+        public async Task<CartItems> postCartItem(CartItems newCartItems)
         {
-            foreach(CartItems element in newCartItems.cartItems)
-            {
-                this.repo.Add<CartItems>(element);
-            }
+           this.repo.Add<CartItems>(newCartItems);
 
             if (await this.repo.SaveChangesAsync())
             {
-                return newCartItems.cartItems;
+                return newCartItems;
             }
 
             return null;

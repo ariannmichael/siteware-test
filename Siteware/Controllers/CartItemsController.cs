@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -42,8 +43,8 @@ namespace Siteware.Controllers
         {
             try
             {
-                var result = await this.cartItemsService.getCartItemById(cartItemId);
-                return Ok(result);
+                var cartItem = await this.cartItemsService.getCartItemById(cartItemId);
+                return Ok(cartItem);
             }
             catch (Exception ex)
             {
@@ -66,15 +67,15 @@ namespace Siteware.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> postCartItem(CartItemsDTO cartItemsDTO)
+        public async Task<IActionResult> postCartItem(CartItems cartItems)
         {
             try
             {
-                CartItems[] cartItems = await this.cartItemsService.postCartItem(cartItemsDTO);
+                CartItems newCartItems = await this.cartItemsService.postCartItem(cartItems);
 
-                if (cartItems != null)
+                if (newCartItems != null)
                 {
-                    return Ok(cartItems);
+                    return Ok(newCartItems);
                 }
             }
             catch (Exception ex)

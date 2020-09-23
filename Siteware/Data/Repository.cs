@@ -101,6 +101,7 @@ namespace Siteware.Data
         {
             IQueryable<CartItems> query = this.context.CartItems
                 .Where(ci => ci.cartId == cartId)
+                .Include(ci => ci.product)
                 .AsNoTracking();
 
             return await query.ToArrayAsync();
@@ -110,6 +111,7 @@ namespace Siteware.Data
         {
             IQueryable<CartItems> query = this.context.CartItems
                 .Where(ci => ci.id == cartItemId)
+                .Include(ci => ci.product)
                 .AsNoTracking();
 
             return await query.FirstOrDefaultAsync();
