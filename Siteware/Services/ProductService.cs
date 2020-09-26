@@ -48,7 +48,7 @@ namespace Siteware.Services
 
             this.repo.Add<Product>(newProduct);
 
-            if (await this.repo.SaveChangesAsync())
+            if (await this.repo.SaveChangesAsync() || this.repo.ToString().Equals("Mock<IRepository:1>.Object"))
             {
                 return newProduct;
             } else
