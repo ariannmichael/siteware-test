@@ -9,7 +9,7 @@ import { PageStorageComponent } from './modules/page-storage/page-storage.compon
 const routes: Routes = [
     { path: 'products', component: PageProductsComponent },
     { path: 'storage', component: PageStorageComponent },
-    { path: 'cart', component: PageCartComponent },
+    { path: 'user-cart', component: PageCartComponent },
     { path: '', redirectTo: 'products', pathMatch: 'full'}
 ];
 

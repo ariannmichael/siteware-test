@@ -116,5 +116,16 @@ namespace Siteware.Data
 
             return await query.FirstOrDefaultAsync();
         }
+
+        public async Task<CartItems> GetCartItemsAsyncByProductAndCart(int cartId, int productId)
+        {
+            IQueryable<CartItems> query = this.context.CartItems
+                .Where(ci => ci.cartId == cartId)
+                .Where(ci => ci.productId == productId)
+                .Include(ci => ci.product)
+                .AsNoTracking();
+
+            return await query.FirstOrDefaultAsync();
+        }
     }
 }

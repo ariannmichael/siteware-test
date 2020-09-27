@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Siteware.Migrations
 {
-    public partial class init : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -71,11 +71,12 @@ namespace Siteware.Migrations
                 columns: new[] { "id", "name", "price", "saletype" },
                 values: new object[,]
                 {
-                    { 1, "Fender Jazzmaster", 230.0, 1 },
-                    { 2, "Fender Stratocaster", 150.0, 1 },
-                    { 3, "Ibanez JEM", 400.0, 2 },
-                    { 4, "Gibson SG", 250.0, 0 },
-                    { 5, "Gibson Explorer", 500.0, 0 }
+                    { 1, "Sabonete", 5.0, 1 },
+                    { 2, "Sabão", 7.0, 1 },
+                    { 3, "Shampoo", 10.0, 2 },
+                    { 4, "Condicionador", 12.0, 2 },
+                    { 5, "Hidratante", 15.0, 0 },
+                    { 6, "Esfoliante", 8.0, 0 }
                 });
 
             migrationBuilder.InsertData(

@@ -1,10 +1,10 @@
 <header class="mt-5 mb-5">
   <div class="row">
     <H2 class="mr-auto">Estoque</H2>
-    <button type="button" class="btn btn-lg btn-success mr-3 text-white" (click)="addItem()">Adicionar item</button>
+    <button type="button" class="btn btn-lg btn-success mr-3 text-white" (click)="openModalAddItem(template)">Adicionar item</button>
   </div>
 </header>
-<div class="">
+<div>
   <table class="table">
     <thead class="thead-light">
       <tr>
@@ -19,14 +19,46 @@
       <tr *ngFor="let product of products; let i = index">
         <th scope="row">{{i+1}}</th>
         <td>{{product.name}}</td>
-        <td>{{product.price}}</td>
-        <td>{{product.saleType}}</td>
+        <td>R$ {{product.price}}</td>
+        <td>{{getSaleType(product)}}</td>
         <td>
-          <button type="button" class="btn btn-warning mr-3 text-white" (click)="editItem()">Editar</button>
+          <button type="button" class="btn btn-warning mr-3 text-white" (click)="openModalEditItem(product, template)">Editar</button>
 
-          <button type="button" class="btn btn-danger" (click)="deleteItem()">Excluir</button>
+          <button type="button" class="btn btn-danger" (click)="deleteItem(product)">Excluir</button>
         </td>
       </tr>
     </tbody>
   </table>
+
+
+  <ng-template #template>
+    <div class="modal-header">
+      <h4 *ngIf="!selectedProduct" class="modal-title pull-left">Novo Item</h4>
+      <h4 *ngIf="selectedProduct" class="modal-title pull-left">Produto: {{selectedProduct.name}}</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="productForm" (submit)="productSubmit()">
+        <div class="form-group">
+          <label for="formGroupExampleInput">Nome</label>
+          <input type="text" class="form-control" formControlName="name" id="formGroupExampleInput">
+        </div>
+        <div class="form-group">
+          <label for="formGroupExampleInput2">Preço</label>
+          <input type="number" class="form-control" formControlName="price" id="formGroupExampleInput2">
+        </div>
+        <div class="form-group">
+          <label for="formGroupExampleInput2">Promoção</label>
+          <select id="inputState" formControlName="saletype" class="form-control">
+            <option value="0" selected>---</option>
+            <option value="1">Compre 1 leve 2</option>
+            <option value="2">Compre 3 por R$ 10</option>
+          </select>
+        </div>
+        <button class="btn btn-success mr-3 mt-3 text-white" [disabled]="!productForm.valid">Confirmar</button>
+      </form>
+    </div>
+  </ng-template>
 </div>

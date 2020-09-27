@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { ProductService } from 'src/app/core/services/product.service';
+import { getSaleTypeMessage } from 'src/app/shared/helpers';
+import Product from 'src/app/shared/models/Product';
 
 @Component({
   selector: 'app-page-storage',
@@ -7,27 +12,106 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PageStorageComponent implements OnInit {
 
-  public products = [
-    {id: 1, name: "Sabonete", price: 5.00, saleType: "Compre 1 leve 2"},
-    {id: 2, name: "Sabão", price: 7.00, saleType: "Compre 1 leve 2"},
-    {id: 3, name: "Shampoo", price: 10.00, saleType: "Compre 3 por R$ 10"}
-  ];
+  private selectedProduct: Product = null;
+  public products: Product[];
+  public modalRef: BsModalRef;
+  public productForm: FormGroup;
 
-  constructor() { }
+  constructor(
+    private modalService: BsModalService,
+    private productService: ProductService,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit() {
+    this.getProducts();
+    this.createForm();
   }
 
-  addItem() {
-    console.log('addItem');
+  createForm() {
+    this.productForm = this.fb.group({
+      id: [''],
+      name: ['', Validators.required],
+      price: ['', Validators.required],
+      saletype: ['', Validators.required]
+    });
   }
 
-  editItem() {
-    console.log('editItem');
+  getProducts() {
+    this.productService.fetchAllProducts()
+      .subscribe((products: Product[]) => {
+        this.products = products;
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
   }
 
-  deleteItem() {
-    console.log('deleteItem');
+  getSaleType(product: Product) {
+    return getSaleTypeMessage(product.saletype);
+  }
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
+  }
+
+  openModalAddItem(template: TemplateRef<any>) {
+    this.selectedProduct = null;
+    this.productForm.reset();
+    this.openModal(template);
+  }
+
+  openModalEditItem(product: Product, template: TemplateRef<any>) {
+    this.selectedProduct = product;
+    this.productForm.patchValue(product);
+    this.openModal(template);
+  }
+
+  addProduct() {
+    let newProduct = new Product(this.productForm.value.name, this.productForm.value.price, this.productForm.value.saletype);
+
+    this.productService.postProduct(newProduct).subscribe(
+      (product: Product) => {
+        this.getProducts();
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
+  }
+
+  editProduct() {
+    this.productService.putProduct(this.productForm.value).subscribe(
+      (product: Product) => {
+        this.getProducts();
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
+  }
+
+  deleteItem(product: Product) {
+    this.productService.deleteProduct(product.id)
+    .subscribe(
+      () => {
+        this.getProducts();
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
+  }
+
+  productSubmit() {
+    if (this.selectedProduct) {
+      this.editProduct();
+    } else {
+      this.addProduct();
+    }
+
+    this.modalRef.hide();
   }
 
 }

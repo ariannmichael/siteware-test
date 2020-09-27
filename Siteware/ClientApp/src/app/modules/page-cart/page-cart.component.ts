@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { CartService } from 'src/app/core/services/cart.service';
+import { getSaleTypeMessage } from 'src/app/shared/helpers';
+import CartItem from 'src/app/shared/models/CartItem';
+import Product from 'src/app/shared/models/Product';
 
 @Component({
   selector: 'app-page-cart',
@@ -7,19 +11,38 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PageCartComponent implements OnInit {
 
-  public cartItems = [
-    {id: 1, name: "Sabonete", quantity: 4, price: 5.00, saleType: "Compre 1 leve 2"},
-    {id: 2, name: "Sabão", quantity: 2, price: 7.00, saleType: "Compre 1 leve 2"},
-    {id: 3, name: "Shampoo", quantity: 3, price: 10.00, saleType: "Compre 3 por R$ 10"}
-  ];
+  public cartItems: CartItem[];
 
-  constructor() { }
+  constructor(private cartService: CartService) { }
 
   ngOnInit() {
+    this.getCartItems();
   }
 
-  removeItem() {
-    console.log("remove item");
-    
+  getCartItems() {
+    this.cartService.fetchAllCartItems()
+      .subscribe((cartItems: CartItem[]) => {
+        this.cartItems = cartItems;
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
+  }
+
+  getSaleType(product: Product) {
+    return getSaleTypeMessage(product.saletype);
+  }
+
+  removeItem(item: CartItem) {
+    this.cartService.deleteCarItem(item.id)
+    .subscribe(
+      () => {
+        this.getCartItems();
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
   }
 }

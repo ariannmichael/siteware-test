@@ -18,11 +18,12 @@ namespace Siteware.Data
         {
             var products = new List<Product>()
                 {
-                    new Product(1, "Fender Jazzmaster", 230.00, SaleTypes.TAKE2PAY1),
-                    new Product(2, "Fender Stratocaster", 150.00, SaleTypes.TAKE2PAY1),
-                    new Product(3, "Ibanez JEM", 400.00, SaleTypes.TAKE3FOR10),
-                    new Product(4, "Gibson SG", 250.00),
-                    new Product(5, "Gibson Explorer", 500.00)
+                    new Product(1, "Sabonete", 5.00, SaleTypes.TAKE2PAY1),
+                    new Product(2, "Sabão", 7.00, SaleTypes.TAKE2PAY1),
+                    new Product(3, "Shampoo", 10.00, SaleTypes.TAKE3FOR10),
+                    new Product(4, "Condicionador", 12.00, SaleTypes.TAKE3FOR10),
+                    new Product(5, "Hidratante", 15.00),
+                    new Product(6, "Esfoliante", 8.00)
                 };
 
             var carts = new List<Cart>()

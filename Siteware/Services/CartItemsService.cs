@@ -41,13 +41,22 @@ namespace Siteware.Services
             return cartItems;
         }
 
-        public async Task<CartItems> postCartItem(CartItems newCartItems)
+        public async Task<CartItems> postCartItem(CartItems newCartItem)
         {
-           this.repo.Add<CartItems>(newCartItems);
+            CartItems cartItem = await this.repo.GetCartItemsAsyncByProductAndCart(newCartItem.cartId, newCartItem.productId);
+
+            if(cartItem != null)
+            {
+                cartItem.quantity += 1;
+                this.repo.Update<CartItems>(cartItem);
+            } else
+            {
+                this.repo.Add<CartItems>(newCartItem);
+            }
 
             if (await this.repo.SaveChangesAsync())
             {
-                return newCartItems;
+                return newCartItem;
             }
 
             return null;

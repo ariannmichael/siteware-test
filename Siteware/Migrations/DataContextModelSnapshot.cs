@@ -110,36 +110,43 @@ namespace Siteware.Migrations
                         new
                         {
                             id = 1,
-                            name = "Fender Jazzmaster",
-                            price = 230.0,
+                            name = "Sabonete",
+                            price = 5.0,
                             saletype = 1
                         },
                         new
                         {
                             id = 2,
-                            name = "Fender Stratocaster",
-                            price = 150.0,
+                            name = "Sabão",
+                            price = 7.0,
                             saletype = 1
                         },
                         new
                         {
                             id = 3,
-                            name = "Ibanez JEM",
-                            price = 400.0,
+                            name = "Shampoo",
+                            price = 10.0,
                             saletype = 2
                         },
                         new
                         {
                             id = 4,
-                            name = "Gibson SG",
-                            price = 250.0,
-                            saletype = 0
+                            name = "Condicionador",
+                            price = 12.0,
+                            saletype = 2
                         },
                         new
                         {
                             id = 5,
-                            name = "Gibson Explorer",
-                            price = 500.0,
+                            name = "Hidratante",
+                            price = 15.0,
+                            saletype = 0
+                        },
+                        new
+                        {
+                            id = 6,
+                            name = "Esfoliante",
+                            price = 8.0,
                             saletype = 0
                         });
                 });
