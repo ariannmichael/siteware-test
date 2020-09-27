@@ -1,3 +1,29 @@
-<p>
-  page-cart works!
-</p>
+<header class="mt-5 mb-5">
+  <H2>Carrinho</H2>
+</header>
+<div class="">
+  <table class="table">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nome</th>
+        <th scope="col">Quantidade</th>
+        <th scope="col">Preço</th>
+        <th scope="col">Promoção</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of cartItems; let i = index">
+        <th scope="row">{{i+1}}</th>
+        <td>{{item.name}}</td>
+        <td>{{item.quantity}}</td>
+        <td>{{item.price}}</td>
+        <td>{{item.saleType}}</td>
+        <td>
+          <button type="button" class="btn btn-danger" (click)="removeItem()">Remover</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

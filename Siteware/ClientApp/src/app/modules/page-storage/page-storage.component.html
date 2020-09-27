@@ -1,3 +1,32 @@
-<p>
-  page-storage works!
-</p>
+<header class="mt-5 mb-5">
+  <div class="row">
+    <H2 class="mr-auto">Estoque</H2>
+    <button type="button" class="btn btn-lg btn-success mr-3 text-white" (click)="addItem()">Adicionar item</button>
+  </div>
+</header>
+<div class="">
+  <table class="table">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nome</th>
+        <th scope="col">Preço</th>
+        <th scope="col">Promoção</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products; let i = index">
+        <th scope="row">{{i+1}}</th>
+        <td>{{product.name}}</td>
+        <td>{{product.price}}</td>
+        <td>{{product.saleType}}</td>
+        <td>
+          <button type="button" class="btn btn-warning mr-3 text-white" (click)="editItem()">Editar</button>
+
+          <button type="button" class="btn btn-danger" (click)="deleteItem()">Excluir</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

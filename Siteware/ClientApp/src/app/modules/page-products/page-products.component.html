@@ -1,3 +1,10 @@
-<p>
-  page-products works!
-</p>
+<header class="mt-5 mb-5">
+  <H2 class="mr-auto">Produtos</H2>
+</header>
+<div>
+  <div class="card-deck">
+    <ng-container *ngFor="let product of products">
+      <app-card-product [product]="product"></app-card-product>
+    </ng-container>
+  </div>
+</div>

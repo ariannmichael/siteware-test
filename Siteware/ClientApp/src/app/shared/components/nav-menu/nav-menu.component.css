@@ -16,3 +16,11 @@ html {
 .box-shadow {
   box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
+
+.brand {
+  color: #DE1A22;
+}
+
+.brand:focus {
+  color: #DE1A22;
+}
