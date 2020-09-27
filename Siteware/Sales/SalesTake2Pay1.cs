@@ -10,7 +10,7 @@ namespace Siteware.Sales
     {
         public double caculateProductPrice(int quantity, double price)
         {
-            return (price*quantity)/2;
+            return (price*quantity)/2.0;
         }
     }
 }
