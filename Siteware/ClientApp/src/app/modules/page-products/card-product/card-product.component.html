@@ -1,7 +1,7 @@
 <div class="card mb-4" style="width: 18rem;">
   <div class="card-body">
     <h5 class="card-title">{{product.name}}</h5>
-    <h6 class="card-subtitle mb-2 text-muted">R${{product.price}}</h6>
+    <h6 class="card-subtitle mb-2 text-muted">R${{product.price |  number : '1.2-2'}}</h6>
     <p class="card-text text-danger">{{saleType}}</p>
     <br>
     <button type="button" class="btn btn-success text-white col-12" (click)="buyItem(product)">

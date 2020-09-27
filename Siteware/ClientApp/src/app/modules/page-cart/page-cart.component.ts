@@ -34,6 +34,17 @@ export class PageCartComponent implements OnInit {
     return getSaleTypeMessage(product.saletype);
   }
 
+  getTotalPrice() {
+    if (!this.cartItems) {
+      return 0;
+    }
+
+    return this.cartItems.reduce((accumulator, current) => {
+      accumulator += current.productPrice;
+      return accumulator;
+    }, 0);
+  }
+
   removeItem(item: CartItem) {
     this.cartService.deleteCarItem(item.id)
     .subscribe(

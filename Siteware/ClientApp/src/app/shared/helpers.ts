@@ -7,6 +7,6 @@ export function getSaleTypeMessage(saleType: SaleTypes) {
         case 1:
             return "Compre 1 leve 2";
         case 2:
-            return "Compre 3 por 1";
+            return "Compre 3 por R$ 10";
     }
 }
