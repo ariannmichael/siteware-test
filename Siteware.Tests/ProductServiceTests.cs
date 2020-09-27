@@ -18,6 +18,8 @@ namespace Siteware.Tests
     {
         private readonly IProductService _sut;
         private readonly Mock<IRepository> _repositoryMock = new Mock<IRepository>();
+        private readonly DataContext context = new DataContext();
+        private readonly IRepository repository = new Repository();
         private readonly IMapper _mapper; 
         
         public ProductServiceTests()
@@ -232,7 +234,7 @@ namespace Siteware.Tests
             _repositoryMock.Setup(x => x.Add<Product>(It.IsAny<Product>()));
 
             //// Act
-            //var product = await _sut.postProduct(null);
+            var product = await _sut.postProduct(null);
 
             //// Assert
             //Assert.Null(product);

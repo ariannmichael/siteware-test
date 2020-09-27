@@ -1,6 +1,7 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { ToastrService } from 'ngx-toastr';
 import { ProductService } from 'src/app/core/services/product.service';
 import { getSaleTypeMessage } from 'src/app/shared/helpers';
 import Product from 'src/app/shared/models/Product';
@@ -20,7 +21,8 @@ export class PageStorageComponent implements OnInit {
   constructor(
     private modalService: BsModalService,
     private productService: ProductService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit() {
@@ -74,9 +76,11 @@ export class PageStorageComponent implements OnInit {
     this.productService.postProduct(newProduct).subscribe(
       (product: Product) => {
         this.getProducts();
+        this.toastr.success("Item adicionado ao estoque!");
       },
       (error: any) => {
         console.log(error);
+        this.toastr.error("Erro ao adicionar!");
       }
     );
   }
@@ -85,9 +89,11 @@ export class PageStorageComponent implements OnInit {
     this.productService.putProduct(this.productForm.value).subscribe(
       (product: Product) => {
         this.getProducts();
+        this.toastr.success("Item editado com sucesso!");
       },
       (error: any) => {
         console.log(error);
+        this.toastr.error("Erro ao editar!");
       }
     );
   }
@@ -97,9 +103,11 @@ export class PageStorageComponent implements OnInit {
     .subscribe(
       () => {
         this.getProducts();
+        this.toastr.success("Item removido com sucesso!");
       },
       (error: any) => {
         console.log(error);
+        this.toastr.error("Erro ao remover!");
       }
     );
   }

@@ -35,7 +35,7 @@ namespace Siteware.Services
 
         public async Task<CartItemsDTO[]> getAllCartItemsByCartId(int cartId)
         {
-            CartItems[] results = await this.repo.GetAllCartItemsAsyncByCart(cartId);
+            CartItems[] results = await this.repo.GetAllCartItemsAsyncByCartId(cartId);
             var cartItems = this.mapper.Map<CartItems[], CartItemsDTO[]>(results.ToArray());
 
             return cartItems;

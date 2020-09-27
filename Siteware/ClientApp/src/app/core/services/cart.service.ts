@@ -18,8 +18,8 @@ export class CartService {
     return this.http.post(this.baseUrl + 'cartItems', cartItem);
   }
 
-  public putCarItem(id: number, cartItem: CartItem) {
-    return this.http.put(this.baseUrl + `cartItems/${id}`, cartItem);
+  public putCarItem(cartItem: CartItem) {
+    return this.http.put(this.baseUrl + `cartItems/${cartItem.id}`, cartItem);
   }
 
   public deleteCarItem(id: number) {

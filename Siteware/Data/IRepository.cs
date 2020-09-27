@@ -26,7 +26,7 @@ namespace Siteware.Data
         // CartItems
         Task<CartItems[]> GetAllCartItemsAsync();
         Task<CartItems> GetCartItemsAsyncById(int cartItemId);
-        Task<CartItems[]> GetAllCartItemsAsyncByCart(int cartId);
+        Task<CartItems[]> GetAllCartItemsAsyncByCartId(int cartId);
         Task<CartItems> GetCartItemsAsyncByProductAndCart(int cartId, int productId);
     }
 }

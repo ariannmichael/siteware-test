@@ -15,7 +15,11 @@
     <tbody>
       <tr *ngFor="let item of cartItems; let i = index">
         <td scope="row">{{item.product.name}}</td>
-        <td>{{item.quantity}}</td>
+        <td>
+          <button type="button" class="btn btn-primary mr-2" (click)="minusItemQuantity(item)">-</button>
+          {{item.quantity}}
+          <button type="button" class="btn btn-success ml-2" (click)="addItemQuantity(item)">+</button>
+        </td>
         <td>R$ {{item.productPrice |  number : '1.2-2'}}</td>
         <td>{{getSaleType(item.product)}}</td>
         <td>

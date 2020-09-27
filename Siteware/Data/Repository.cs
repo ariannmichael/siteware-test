@@ -97,7 +97,7 @@ namespace Siteware.Data
 
             return await query.ToArrayAsync();
         }
-        public async Task<CartItems[]> GetAllCartItemsAsyncByCart(int cartId)
+        public async Task<CartItems[]> GetAllCartItemsAsyncByCartId(int cartId)
         {
             IQueryable<CartItems> query = this.context.CartItems
                 .Where(ci => ci.cartId == cartId)
