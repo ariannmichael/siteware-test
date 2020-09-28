@@ -161,19 +161,5 @@ namespace Siteware.Tests
             Assert.Equal(cartItems[0].quantity, cartItems2[0].quantity);
             Assert.Equal(cartItems[0].id, cartItems2[0].id);
         }
-
-        //[Fact]
-        //public async Task postProduct_ShouldReturnNothing_WhenProductIsntAdd()
-        //{
-        //    // Arrange
-        //    _repositoryMock.Setup(x => x.Add<Product>(It.IsAny<Product>()));
-
-        //    //// Act
-        //    //var product = await _sut.postProduct(null);
-
-        //    //// Assert
-        //    //Assert.Null(product);
-        //    Assert.True(true);
-        //}
     }
 }

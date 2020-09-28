@@ -18,8 +18,6 @@ namespace Siteware.Tests
     {
         private readonly IProductService _sut;
         private readonly Mock<IRepository> _repositoryMock = new Mock<IRepository>();
-        private readonly DataContext context = new DataContext();
-        private readonly IRepository repository = new Repository();
         private readonly IMapper _mapper; 
         
         public ProductServiceTests()
@@ -205,40 +203,6 @@ namespace Siteware.Tests
 
             // Assert
             Assert.Null(product);
-        }
-
-        [Fact]
-        public async Task postProduct_ShouldReturnNewProduct_WhenProductIsAdd()
-        {
-            // Arrange
-            var productId = 1;
-            var name = "sabonete";
-            var price = 5.0;
-            var productDTO = new ProductDTO(productId, name, price, SaleTypes.TAKE2PAY1);
-            var product = _mapper.Map<Product>(productDTO);
-            _repositoryMock.Setup(x => x.Add<Product>(product));
-
-            // Act
-            var product2 = await _sut.postProduct(productDTO);
-
-            // Assert
-            Assert.Equal(product2.name, product.name);
-            Assert.Equal(product2.price, product.price);
-            Assert.Equal(product2.saletype, product.saletype);
-        }
-
-        [Fact]
-        public async Task postProduct_ShouldReturnNothing_WhenProductIsntAdd()
-        {
-            // Arrange
-            _repositoryMock.Setup(x => x.Add<Product>(It.IsAny<Product>()));
-
-            //// Act
-            var product = await _sut.postProduct(null);
-
-            //// Assert
-            //Assert.Null(product);
-            Assert.True(true);
         }
     }
 }
